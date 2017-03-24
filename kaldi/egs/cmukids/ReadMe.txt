@@ -1,26 +1,32 @@
-## gen_lex.sh
+##Generate phones
+###File: gen_lex.sh
 
 word boudaries or without
 
-## lm.sh
+##Language Model
+###File: lm.sh
 
-set original corpus path and lexicon
-in prepare_lang.sh set phone position to false, silence phone map to one l54, l57
+- set original corpus path and lexicon
+- in prepare_lang.sh set phone position to false, silence phone map to one l54, l57
 
+##Transcription
 
-## transcript.sh  
+###File: transcript.sh  
 
 (run for various datasets)
 set trgt and transcript
 
-## featextract.sh  (independent of pervious steps, run parallel)
+##Feature Extraction
+###File: featextract.sh  (independent of pervious steps, run parallel)
 
 1. set $trgt directory to place wav.scp in 
 2. set audio configuration in conf/mfcc.conf
 3. change lines 40-43 accordingly
 
-## train.sh
+##Training
+###File: train.sh
 
 set data paths for experiments
 
-decode.sh
+##Decode
+###File: decode.sh
