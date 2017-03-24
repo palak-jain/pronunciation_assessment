@@ -9,10 +9,12 @@
 # optional_silence.txt    [<phone>]   
 # ------------------------------------------------------------------- #
 
-. ./path.sh
+. local/path.sh
 
 # phones
-cp $static/phone/*silence.phone $dict/
+rm -rf $dict
+mkdir $dict
+cp $static/phone/*silence*.txt $dict/
 
 # lexicon
 echo "---- Preparing Lexicon ----"
@@ -31,10 +33,10 @@ echo "---- Preparing Lexicon ----"
 
 
 # No word boundaries
-paste $dict/nonsilence.phone $dict/nonsilence.phone > $dict/lexicon.txt 
-paste $dict/silence.phone $dict/silence.phone >> $dict/lexicon.txt 
+paste $dict/nonsilence_phones.txt $dict/nonsilence_phones.txt > $dict/lexicon.txt 
+paste $dict/silence_phones.txt $dict/silence_phones.txt >> $dict/lexicon.txt 
 
 # Add SIL and UNK
-echo -e "<UNK> \t SPN" >> lexicon.txt
+echo -e "<UNK> \t SPN" >> $dict/lexicon.txt
 
 rm -rf $dict/*.phones_ 

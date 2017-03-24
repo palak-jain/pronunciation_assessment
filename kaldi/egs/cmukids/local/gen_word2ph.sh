@@ -14,7 +14,7 @@ tr ' ' '\n' < $corpus | grep -v "(^\s*$)" |  sort | uniq -c | sort -bnr | sed 's
 
 # lexicon
 echo "---- GET LEXICONS NOT IN LIST ----"
-python3 local/common_words.py $lexicon $voc_path/vocab.txt > $notpresent #> $dir/lex/common.lex
+python3 local/outoflexicon.py $lexicon $voc_path/vocab.txt > $notpresent #> $dir/lex/common.lex
 
 if [[ `cat $notpresent` ]]; then
   echo "Get lexicon mapping for $notpresent at http://www.speech.cs.cmu.edu/tools/lextool.html"

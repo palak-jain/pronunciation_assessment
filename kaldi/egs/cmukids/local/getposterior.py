@@ -11,11 +11,14 @@ featurePath = sys.argv[4]
 # phone to id
 phones = open(phoneFile)
 phone2id = {"UNK" : 0}
+id2phone = {0 : "UNK"}
+
 idx = 1
 for ph in phones:
 	ph = ph.split()[0]
 	phone2id[ph] = idx
-	print ph ,"\t", idx
+	id2phone[idx] = ph
+	# print ph ,"\t", idx
 	idx += 1
 
 nPhone = len(phone2id)
@@ -45,13 +48,22 @@ for audio in pgram:
 	for k in range(nFrame):
 		pdf = frames[k].split(']')[0].split()
 		if (len(pdf) % 2):
-			print "pdf format should be even in length"
+			print ("pdf format should be even in length")
 			exit();
 
-		for i in range(len(pdf)/2):
+		for i in range(int(len(pdf)/2)):
 			tid = pdf[i*2];
 			phoneId = tid2phone[tid] 
 			prob = np.float(pdf[i*2 + 1])
 			posterior[k][phoneId] += prob
 
 	np.savetxt(featurePath + fid + ".feat", posterior)
+
+	# print(fid)
+	# for pdf in posterior:
+	# 	for i in range(len(pdf)):
+	# 		if pdf[i] > 0.0001:
+	# 			print(id2phone[i], ":", pdf[i], end="\t") 
+	# 	print("")
+	
+	# print("")

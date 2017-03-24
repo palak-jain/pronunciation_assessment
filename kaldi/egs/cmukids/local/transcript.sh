@@ -25,21 +25,30 @@ data2="/Users/Palak/Desktop/Rnd/data/cmu/kids2/"
 dict="$home/data/local/dict"
 lex="$home/data/local/lex"
 static="$home/.static_data"
-transcript="$static/text/test_transcrp.tbl"
-trgt="test_cmu"
+transcript=$2
+trgt=$1
+
+if [[ $# -lt 2 ]]; then
+	echo "Usage: ./transcript.sh trgt_dir transcript_path";
+	echo "Example: ./transcript.sh train_all text"
+	exit 1;
+fi
 
 # ------------------------------- PREPARATION -------------------------------------- #
-rm -rf data/$trgt
+rm -rf data/$trgt/
 mkdir -p data/$trgt/
 # text
 echo "---- Preparing transcription ----"
 
 sort  $transcript  > $home/data/$trgt/text_sort_
 cut -c-8 $home/data/$trgt/text_sort_ > $home/details/utt_$trgt.id
-sed 's/\w\{7\}[1-2] //g' < $home/data/$trgt/text_sort_ > $home/data/$trgt/text_word_
-./local/refine_corpus.sh $home/data/$trgt/text_word_ $home/data/$trgt/text_word
+sed 's:.\{7\}[0-9]::g' < $home/data/$trgt/text_sort_ > $home/data/$trgt/text_word_   # tab to space replace in other text files
+./local/refine_transcript.sh $home/data/$trgt/text_word_ $home/data/$trgt/text_word
 python3 local/prep_corpus.py $static/lexicon/word2phone $home/data/$trgt/text_word > $home/data/$trgt/text_
 paste $home/details/utt_$trgt.id $home/data/$trgt/text_ > $home/data/$trgt/text
+
+ntext=`wc -l $home/data/$trgt/text`
+echo "Number of transcriptions : $ntext"
 
 # utt2spk spk2gender
 x=$trgt

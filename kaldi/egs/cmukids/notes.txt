@@ -1,0 +1,22 @@
+Notes | MODifications
+
+1. change lda dimension : steps/train_lda_mllt.sh  l22
+2. phones code
+3. position dependent phone disabled : prepare_lang.sh
+
+# tools
+
+./src/bin/am-info model info
+ ../../src/fstbin/fstmaketidsym --separator ''
+
+# explanations
+
+transition-id
+They encode the information contained withing a transition-id as four underscore-separated fields - phone, HMM state index withing the triphone, PDF ID and the index of outgoing arc from the node in the second field (in this order). 
+
+
+
+map alignment : use graph else, speaker independent features
+
+#
+lm order 2

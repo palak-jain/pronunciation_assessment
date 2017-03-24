@@ -33,9 +33,7 @@
 
 # ------------------------------- PATHS------------------------------------ #
 
-home="$PWD"
-data="/Users/Palak/Desktop/Rnd/data/cmu/kids1/"
-data2="/Users/Palak/Desktop/Rnd/data/cmu/kids2/"
+. local/path.sh
 
 # ------------------------------- PREPARATION -------------------------------------- #
 

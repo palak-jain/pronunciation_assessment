@@ -1,21 +1,26 @@
 #!/bin/bash
 
-. ./path.sh || exit 1
-. ./cmd.sh || exit 1
+. local/path.sh || exit 1
+. local/cmd.sh || exit 1
 
-lm_order=3     # language model order (n-gram quantity) - 1 is enough for digits grammar
+lm_order=2     # language model order (n-gram quantity) - 1 is enough for digits grammar
+
+if [[ $# -lt 2 ]]; then
+  echo "Usage: ./path_to_lm/lm.sh lexicon corpus"
+  echo "Example: ./local/lm.sh .static_data/lexicon/word2phone .static_data/corpus/corpus.txt"
+  exit 1;
+fi
 
 home="$PWD"
-lexicon="$static/lexicon/word2phone"
-corpus="$static/corpus/corpus_orig.txt"
+lexicon=$1
+corpus=$2
 
 
 # Refine corpus
 rm -rf data/local/lex/notpresent.txt data/local/lang data/lang data/local/tmp data/local/dict/lexiconp.txt
 
 echo "---- Refining Word Corpus and Preparing Word Phone Map ----"
-. $home/local/refine_corpus.sh $corpus $static/corpus/corpus.txt
-[[ . $home/local/gen_word2ph.sh $corpus $lexicon $lex/notpresent.txt ]] || { exit 1; }
+# . $home/local/refine_corpus.sh $corpus $static/corpus/corpus.txt || { exit 1; }
 
 echo "---- Preparing Phone Corpus ----"
 

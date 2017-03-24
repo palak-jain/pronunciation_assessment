@@ -12,7 +12,7 @@ mfccdir=mfcc
 # Make "per-utterance" versions of the test sets where the speaker
 # information corresponds to utterances-- to demonstrate adaptation on
 # short utterances, particularly for basis fMLLR
-for x in test_eval92 test_eval93 test_dev93 ; do
+for x in test_cmu test_dahanu ; do
   y=${x}_utt
   rm -r data/$y
   cp -r data/$x data/$y

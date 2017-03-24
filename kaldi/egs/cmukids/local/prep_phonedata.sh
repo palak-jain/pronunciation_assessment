@@ -32,13 +32,7 @@
 # optional_silence.txt    [<phone>]   
 
 # ------------------------------- PATHS------------------------------------ #
-
-home="$PWD"
-data="/Users/Palak/Desktop/Rnd/data/cmu/kids1/"
-data2="/Users/Palak/Desktop/Rnd/data/cmu/kids2/"
-dict="$home/data/local/dict"
-lex="$home/data/local/lex"
-static="$home/.static_data"
+. local/path.sh
 
 # ------------------------------- PREPARATION -------------------------------------- #
 
