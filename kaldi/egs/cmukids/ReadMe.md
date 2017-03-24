@@ -1,4 +1,9 @@
-# ASR system on child teacher cmukids corpus
+# ASR system 
+
+## Datasets
+1. child 
+2. teacher 
+3. cmukids 
 
 ## Generate phones
 ### File: gen_lex.sh
